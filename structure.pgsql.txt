@@ -1,0 +1,14 @@
+project-folder/
+├── index.html
+├── style.css
+├── manifest.json
+├── icons/
+│   └── icon-192.png
+├── js/
+│   ├── app.js
+│   ├── tabs.js
+│   ├── theme.js
+│   ├── lang.js
+│   ├── notifications.js
+│   └── assessments.js
+└── service-worker.js

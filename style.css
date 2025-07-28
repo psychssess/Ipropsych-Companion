@@ -1,0 +1,252 @@
+/* ========== 1. RESET & ANIMATIONS ========== */
+
+/* Reset box-sizing for consistency */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Fade-in animation */
+.fade-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ========== 2. LAYOUT & CONTAINERS ========== */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", sans-serif;
+  background-color: #f0f6ff;
+  color: #1a1a1a;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-bottom: 5rem;
+}
+
+.app-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+#app-title {
+  font-size: 1.6rem;
+  color: #004aad;
+}
+/* ========== 3. FORMS & INPUTS ========== */
+
+select,
+input[type="number"],
+input[type="text"],
+button {
+  font-size: 1rem;
+  padding: 0.3rem 0.6rem;
+  border: 2px solid #004aad;
+  border-radius: 4px;
+  background: white;
+  color: #004aad;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+select:focus,
+input:focus,
+button:focus,
+select:hover,
+input:hover,
+button:hover {
+  background-color: #cce0ff;
+  outline: none;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+form label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+input[type="range"] {
+  width: 150px;
+  margin-left: 1rem;
+}
+/* ========== 4. BUTTONS & NAVIGATION ========== */
+
+.btn,
+#notifyBtn,
+button[type="submit"] {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover,
+#notifyBtn:hover,
+button[type="submit"]:hover {
+  background-color: #003580;
+}
+
+.tab-btn {
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+.tab-btn span {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.tab-btn.active {
+  color: #004aad;
+  font-weight: bold;
+}
+/* ========== 5. COMPONENTS (CARDS, LABELS, TABS) ========== */
+
+.card {
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 50, 0.1);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h2 {
+  color: #004aad;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+}
+
+#tips-list {
+  list-style: disc inside;
+  margin: 0;
+  padding-left: 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+#education-snippets {
+  font-size: 0.95rem;
+  color: #444;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+#historyChart,
+#sleepHistoryChart,
+canvas {
+  width: 100%;
+  max-height: 250px;
+  height: auto;
+}
+
+.screen {
+  display: none;
+}
+
+.screen:not(.hidden) {
+  display: block;
+}
+
+section.screen {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.screen.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+/* ========== 6. DARK MODE OVERRIDES (.dark) ========== */
+
+.dark {
+  background-color: #121624;
+  color: #e0e0e0;
+}
+
+.dark .input {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  border-color: #374151;
+}
+
+.dark .btn,
+.dark #notifyBtn,
+.dark button[type="submit"] {
+  background-color: #2563eb;
+  color: white;
+}
+
+.dark .btn:hover,
+.dark #notifyBtn:hover,
+.dark button[type="submit"]:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .card {
+  background: #1e2237;
+  box-shadow: 0 3px 8px rgba(255, 255, 255, 0.05);
+}
+
+.dark header #app-title,
+.dark header select,
+.dark header button,
+.dark footer h2,
+.dark footer h3,
+.dark footer a {
+  color: #a0c4ff;
+}
+
+.dark form label {
+  color: #ddd;
+}
+
+.dark .tab-btn {
+  color: #d1d5db;
+}

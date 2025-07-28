@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Good: language attribute set -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#004aad" />
+  <title>Ipropsych Companion</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- PWA & favicon -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white pb-20">
+
+  <!-- 🏠 Home Section -->
+  <section id="home" class="screen p-4">
+    <div class="flex justify-center mb-4">
+      <img src="icons/icon-192.png" alt="Ipropsych Logo" class="w-24 h-24 rounded-full shadow-lg" />
+    </div>
+    <p class="text-center text-sm italic text-gray-600 dark:text-gray-300 mt-2">Your Mind, Your Companion.</p>
+    <h1 class="text-2xl font-bold mb-4">Welcome to Ipropsych Companion</h1>
+    <p class="mb-4">Start your daily check-in or review suggestions for better well-being.</p>
+  </section>
+
+  <!-- 🌙 Sleep Section -->
+  <section id="sleep" class="screen hidden p-4">
+    <h2 class="text-xl font-semibold mb-4">Sleep Tracker</h2>
+    <form id="sleepForm" class="space-y-3">
+      <label for="sleepHours">How many hours did you sleep?</label>
+      <input type="number" id="sleepHours" name="sleepHours" min="0" max="12" class="input" required />
+
+      <label for="sleepQuality">How was the quality?</label>
+      <select id="sleepQuality" name="sleepQuality" class="input" required>
+        <option>Very Restful</option>
+        <option>Okay</option>
+        <option>Restless</option>
+      </select>
+
+      <button type="submit" class="btn">Save Sleep</button>
+    </form>
+  </section>
+
+  <!-- 🧪 Assessment Section -->
+  <section id="assess" class="screen hidden p-4">
+    <h2 class="text-xl font-semibold mb-4">Standardized Assessments</h2>
+    <button onclick="startDASS21()" class="btn mb-2">Take DASS-21</button>
+    <button onclick="startWHO5()" class="btn mb-4">Take WHO-5</button>
+    <div id="assessment-form"></div>
+  </section>
+
+  <!-- 📊 Progress Section -->
+  <section id="progress" class="screen hidden p-4">
+    <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-4">
+      <h2 class="text-xl font-semibold mb-2">🧠 Well-being History</h2>
+      <div class="w-full h-64">
+        <canvas id="historyChart" class="w-full h-full"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 shadow rounded-2xl p-4 mt-6">
+      <h2 class="text-xl font-semibold mb-2">😴 Sleep History</h2>
+      <div class="w-full h-64">
+        <canvas id="sleepHistoryChart" class="w-full h-full"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded shadow p-4 mt-6">
+      <h3 class="text-lg font-semibold mb-2">🧠 Assessment History</h3>
+      <ul id="assessment-history" class="text-sm text-gray-700 dark:text-gray-300 list-disc pl-5"></ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 rounded shadow p-4 mt-6">
+      <h3 class="text-lg font-semibold mb-2">😴 Sleep Log</h3>
+      <ul id="sleep-history" class="text-sm text-gray-700 dark:text-gray-300 list-disc pl-5"></ul>
+    </div>
+  </section>
+
+  <!-- ☰ More Section -->
+  <section id="more" class="screen hidden p-4">
+    <h2 class="text-xl font-semibold mb-2">More</h2>
+    <button id="theme-toggle" class="btn">🌗 Toggle Theme</button>
+    <button id="notifyBtn" class="btn mt-2">🔔 Enable Reminder</button>
+    <button id="language-toggle" class="btn mt-2">🌐 Switch Language</button>
+
+    <div class="mt-6 text-sm">
+      <h3 class="font-semibold">About the Developer</h3>
+      <p>Developed by Assoc. Prof. Enoch Tomiwo Oladunmoye</p>
+      <p>Email: <a href="mailto:oladunmoyetomenoch@gmail.com" class="text-blue-500 underline">oladunmoyetomenoch@gmail.com</a></p>
+    </div>
+  </section>
+
+  <!-- 🔽 Bottom Navigation -->
+  <nav
+    class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 flex justify-around items-center py-2 z-50"
+    role="navigation" aria-label="Main Navigation"
+  >
+    <button class="tab-btn text-center" data-target="home" aria-label="Home">
+      <span>🏠</span><br /><small>Home</small>
+    </button>
+    <button class="tab-btn text-center" data-target="sleep" aria-label="Sleep Tracker">
+      <span>🌙</span><br /><small>Sleep</small>
+    </button>
+    <button class="tab-btn text-center" data-target="assess" aria-label="Assessments">
+      <span>🧪</span><br /><small>Assess</small>
+    </button>
+    <button class="tab-btn text-center" data-target="progress" aria-label="Progress Charts">
+      <span>📊</span><br /><small>Progress</small>
+    </button>
+    <button class="tab-btn text-center" data-target="more" aria-label="More Options">
+      <span>☰</span><br /><small>More</small>
+    </button>
+  </nav>
+
+  <!-- 🛠️ Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then((reg) => console.log("✅ Service Worker registered!", reg))
+        .catch((err) => console.error("❌ Service Worker registration failed:", err));
+    }
+  </script>
+
+  <!-- JS Modules -->
+  <script src="script.js"></script>
+</body>
+</html>

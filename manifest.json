@@ -1,0 +1,22 @@
+{
+  "name": "Ipropsych Companion",
+  "short_name": "Ipropsych",
+  "description": "A culturally adapted mental health tool for African university students.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0f6ff",
+  "theme_color": "#004aad",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/7J0kdYLj/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/7J0kdYLj/icon-192.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
